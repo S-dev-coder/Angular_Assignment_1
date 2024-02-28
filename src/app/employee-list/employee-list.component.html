@@ -1,0 +1,57 @@
+<div>
+    <div id="successMessage"></div>
+    <!-- Form content -->
+    <div class="form-content">
+        <!-- Button to add new employee -->
+        <button class="btn" (click)="AddEmployee()">Add Employee</button>
+        <!-- Table to display employee information -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Skills</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through each employee -->
+                <tr *ngFor="let employee of employee;let i=index">
+                    <td>
+                        {{employee.employeeId}}
+                    </td>
+                    <td>
+                        {{employee.name}}
+                    </td>
+                    <td>
+                        {{employee.email}}
+                    </td>
+                    <td>
+                        {{employee.contactNumber}}
+                    </td>
+                    <td>
+                        {{employee.gender}}
+                    </td>
+                    <td>
+                        <!-- List skills with index -->
+                        <div style="list-style: none;">
+                            <ng-container *ngFor="let skill of employee.skills; let i = index; trackBy: trackByIndex">
+                                <div>
+                                    {{ i + 1 }}. {{ skill.skillName }} ({{ skill.experience }})
+                                </div>
+                            </ng-container>
+                        </div>
+                    </td>
+                    <!-- Actions for each employee -->
+                    <td>
+                        <fa-icon [icon]="faPencilAlt" (click)="editEmployee(employee.employeeId)"></fa-icon>
+                        <fa-icon [icon]="faTrash" (click)="DeleteEmployee(i)"></fa-icon>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
